@@ -12,7 +12,8 @@ class Time:
         self.hour = hour
         self.minute = minute
         self.second = second
-    
+ 
+
     def format_time(self):
         """Return time object (t) as a formatted string"""
         return f'{self.hour:02d}:{self.minute:02d}:{self.second:02d}'
@@ -28,7 +29,7 @@ class Time:
         time_seconds = self.time_to_sec()
         nt = sec_to_time(time_seconds + seconds)
         self.hour, self.minute, self.second = nt.hour, nt.minute, nt.second 
-        return None
+        return None        
 
     def time_to_sec(self):
         '''convert a time object to a single integer representing the 
@@ -46,6 +47,18 @@ class Time:
            return False
         return True
 
+    def __str__(self):
+        """Return a string representation for the object self."""
+        return f'{self.hour:02d}:{self.minute:02d}:{self.second:02d}'
+
+    def __repr__(self):
+        """Return a string representation for the object self using '.' instead of ':'."""
+        return f'{self.hour:02d}.{self.minute:02d}.{self.second:02d}'
+
+    def __add__(self, t2):
+        """Overload the '+' operator using sum_times() method."""
+        return self.sum_times(t2)
+
 def sec_to_time(seconds):
     '''convert a given number of seconds to a time object in 
        hour, minute, second format'''
@@ -53,3 +66,4 @@ def sec_to_time(seconds):
     minutes, time.second = divmod(seconds, 60)
     time.hour, time.minute = divmod(minutes, 60)
     return time
+
